@@ -25,13 +25,7 @@ void loop() {
   for (int i = 0; i < 5; i++)
   {
     digitalWrite(OUTPUTPORTS[i], output[i]);
-    if (OUTPUTPORTS[i] == 8)
-    {
-      Serial.print("Eyeblow: ");
-      Serial.println(output[i]);
-    }
   }
-  digitalWrite(EYEBLOWPORT, HIGH);
 }
 
 

@@ -2,6 +2,7 @@ void serialSetup() {
 	Serial.begin(9600);
 }
 
+/*
 void serialLoop() {
 	if (Serial.available() > 0) {
 		char letter = Serial.read();
@@ -18,4 +19,4 @@ void serialLoop() {
     }
 	}
 }
-
+*/

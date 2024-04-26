@@ -4,28 +4,30 @@ const int NOSEPORT = 10;
 const int LEFTMOUTHPORT = 11;
 const int RIGHTMOUTHPORT = 12;
 
-int eyeblow = 0;
-int eye = 0;
-int nose = 0;
-int leftmouth = 0;
-int rightmouth = 0;
+const int OUTPUTPORTS[5] = {EYEBLOWPORT, EYEPORT, NOSEPORT, LEFTMOUTHPORT, RIGHTMOUTHPORT};
+
+
+int output[5] = {0, 0, 0, 0, 0};
 
 void setup() {
   serialSetup();
-  pinMode(EYEBLOWPORT, OUTPUT);
-  pinMode(EYEPORT, OUTPUT);
-  pinMode(NOSEPORT, OUTPUT);
-  pinMode(LEFTMOUTHPORT, OUTPUT);
-  pinMode(RIGHTMOUTHPORT, OUTPUT);
+  buttonSetup();
 }
 
 void loop() {
-  serialLoop();
-  digitalWrite(EYEBLOWPORT, eyeblow);
-  digitalWrite(EYEPORT, eye);
-  digitalWrite(NOSEPORT, nose);
-  digitalWrite(LEFTMOUTHPORT, leftmouth);
-  digitalWrite(RIGHTMOUTHPORT, rightmouth);
+  // serialLoop();
+  buttonLoop();
+  outputUpdate();
+  // for (int i = 0; i < 5; i++)
+  // {
+  //   digitalWrite(OUTPUTPORTS[i], output[i]);
+  //   if (OUTPUTPORTS[i] == 8)
+  //   {
+  //     Serial.print("Eyeblow: ");
+  //     Serial.println(output[i]);
+  //   }
+  // }
+  digitalWrite(EYEBLOWPORT, 1);
 }
 
 

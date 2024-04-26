@@ -12,22 +12,26 @@ int output[5] = {0, 0, 0, 0, 0};
 void setup() {
   serialSetup();
   buttonSetup();
+  for (int i = 0; i < 5; i++)
+  {
+    pinMode(OUTPUTPORTS[i], OUTPUT);
+  }
 }
 
 void loop() {
   // serialLoop();
   buttonLoop();
   outputUpdate();
-  // for (int i = 0; i < 5; i++)
-  // {
-  //   digitalWrite(OUTPUTPORTS[i], output[i]);
-  //   if (OUTPUTPORTS[i] == 8)
-  //   {
-  //     Serial.print("Eyeblow: ");
-  //     Serial.println(output[i]);
-  //   }
-  // }
-  digitalWrite(EYEBLOWPORT, 1);
+  for (int i = 0; i < 5; i++)
+  {
+    digitalWrite(OUTPUTPORTS[i], output[i]);
+    if (OUTPUTPORTS[i] == 8)
+    {
+      Serial.print("Eyeblow: ");
+      Serial.println(output[i]);
+    }
+  }
+  digitalWrite(EYEBLOWPORT, HIGH);
 }
 
 

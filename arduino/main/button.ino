@@ -40,7 +40,7 @@ void buttonLoop()
 void outputUpdate() {
   for (int i = 0; i < 5; i++)
   {
-    if (millis() - time_last_change[i] > 1000)
+    if (millis() - time_last_change[i] > 1000 / 16)
     {
       output[i] = 0;
     } else {

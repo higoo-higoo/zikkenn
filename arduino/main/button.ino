@@ -1,26 +1,26 @@
-const int eyeblowButton = 4;
-const int eyeButton = 2;
-const int noseButton = 3;
-const int leftmouthButton = 5;
-const int rightmouthButton = 6;
+// const int eyeblowButton = 4;
+// const int eyeButton = 2;
+// const int noseButton = 3;
+// const int leftmouthButton = 5;
+// const int rightmouthButton = 6;
+//
+// const int INPUTPORTS[5] = {eyeblowButton, eyeButton, noseButton, leftmouthButton, rightmouthButton};
 
-const int INPUTPORTS[5] = {eyeblowButton, eyeButton, noseButton, leftmouthButton, rightmouthButton};
+const int INPUTPORT = 4;
 
 // ONOFF
-int input_count[5];
-int last_input_state[5];
-unsigned long last_debounce_time[5];
+int input_count;
+int last_input_state;
+unsigned long last_debounce_time;
 unsigned long debounce_delay = 50; // デバウンスのディレイ時間（ミリ秒）
+int phase = 0;
 
 void buttonSetup()
 {
-  for (int i = 0; i < 5; i++)
-  {
-    pinMode(INPUTPORTS[i], INPUT);
-    input_count[i] = 0;
-    last_input_state[i] = LOW;
-    last_debounce_time[i] = 0;
-  }
+  pinMode(INPUTPORT, INPUT);
+  input_count = 0;
+  last_input_state = LOW;
+  last_debounce_time = 0;
 }
 
 void buttonLoop()
@@ -29,22 +29,20 @@ void buttonLoop()
     // Serial.println("stand by");
     return;
   }
-  for (int i = 0; i < 5; i++)
-  {
-    int reading = digitalRead(INPUTPORTS[i]);
-    if (reading != last_input_state[i]) {
-      last_debounce_time[i] = millis();
-    }
-    if ((millis() - last_debounce_time[i]) > debounce_delay) {
-      if (reading == HIGH) {
-        input_count[i]++;
-      } else {
-        input_count[i] = 0;
-      }
-    }if (input_count[i] > 20) {
-      input_count[i] = 0;
-      output[i] = 0;
-    }
-    last_input_state[i] = reading;
+  int reading = digitalRead(INPUTPORT);
+  if (reading != last_input_state) {
+    last_debounce_time = millis();
   }
+  if ((millis() - last_debounce_time) > debounce_delay) {
+    if (reading == HIGH) {
+      input_count++;
+    } else {
+      input_count = 0;
+    }
+  } if (input_count > 20) {
+    input_count = 0;
+    output[phase] = 0;
+    phase++;
+  }
+  last_input_state = reading;
 }

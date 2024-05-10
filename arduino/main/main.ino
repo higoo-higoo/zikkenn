@@ -29,11 +29,11 @@ void loop() {
     digitalWrite(OUTPUTPORTS[i], output[i]);
     if (output[i] == 0 && change[i] == 0)
     {
-      // Serial.print("change id");
-      // Serial.print(i);
-      // Serial.print("change");
-      // change[i] = 1;
-      // Serial.println(change[i]);
+      Serial.print("change id");
+      Serial.print(i);
+      Serial.print("change");
+      change[i] = 1;
+      Serial.println(change[i]);
     }
   }
   delay(1);

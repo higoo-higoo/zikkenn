@@ -14,6 +14,7 @@ int last_input_state;
 unsigned long last_debounce_time;
 unsigned long debounce_delay = 50; // デバウンスのディレイ時間（ミリ秒）
 int phase = 0;
+bool interval = false;
 
 void buttonSetup()
 {
@@ -25,6 +26,10 @@ void buttonSetup()
 
 void buttonLoop()
 {
+  if (interval) {
+    delay(800);
+    interval = false;
+  }
   if (millis() < 1000) {
     // Serial.println("stand by");
     return;
@@ -43,6 +48,7 @@ void buttonLoop()
     input_count = 0;
     output[phase] = 0;
     phase++;
+    interval = true;
   }
   last_input_state = reading;
 }
